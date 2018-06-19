@@ -51,7 +51,7 @@ public class Consulta extends JFrame {
         container.add(lblCodigo);
         container.add(lblUniversidad);
         container.add(lblEdad);
-        //container.add(estado);
+        container.add(estado);
         container.add(codigo);
         container.add(marca);
         container.add(edad);
