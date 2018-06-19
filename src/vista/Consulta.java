@@ -76,7 +76,7 @@ public class Consulta extends JFrame {
         lblCodigo = new JLabel("Carnet");
         lblUniversidad = new JLabel("Universidad");
         lblEdad = new JLabel("Edad");
-        //estado = new JLabel("Estado");
+        estado = new JLabel("Estado");
         lblNombre = new JLabel("Nombre");
         lblApellido = new JLabel("Apellido");
         edads = new JLabel("Edad");
@@ -85,7 +85,7 @@ public class Consulta extends JFrame {
         lblCodigo.setBounds(10, 10, x, y);
         lblUniversidad.setBounds(10, 60, x, y);
         lblEdad.setBounds(10, 100, x, y);
-        //estado.setBounds(10, 140, x, y);
+        estado.setBounds(10, 140, x, y);
         lblApellido.setBounds(300, 90, x, y);
     }
 
