@@ -14,7 +14,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import modelo.Filtro;
+import modelo.Inscripcion;
 /**
  *
  * @author LN710Q
@@ -22,9 +22,9 @@ import modelo.Filtro;
 
 public class Consulta extends JFrame {
 
-    public JLabel lblCodigo, lblUniversidad, lblStock, lblExistencia, lblNombre, lblApellido, edad;
+    public JLabel lblCodigo, lblUniversidad, lblEdad, estado, lblNombre, lblApellido, edads;
 
-    public JTextField codigo, descripcion, stock;
+    public JTextField codigo, descripcion, edad, nombre, apellido;
     public JComboBox marca;
 
     ButtonGroup existencia = new ButtonGroup();
@@ -36,7 +36,7 @@ public class Consulta extends JFrame {
 
     public JButton buscar, eliminar, insertar, limpiar, actualizar;
 
-    private static final int ANCHOC = 130, ALTOC = 30;
+    private static final int x = 130, y = 30;
 
     DefaultTableModel tm;
 
@@ -50,11 +50,11 @@ public class Consulta extends JFrame {
         Container container = getContentPane();
         container.add(lblCodigo);
         container.add(lblUniversidad);
-        container.add(lblStock);
-        container.add(lblExistencia);
+        container.add(lblEdad);
+        //container.add(estado);
         container.add(codigo);
         container.add(marca);
-        container.add(stock);
+        container.add(edad);
         container.add(si);
         container.add(no);
         container.add(buscar);
@@ -65,6 +65,9 @@ public class Consulta extends JFrame {
         container.add(lblNombre);
         container.add(edad);
         container.add(lblApellido);
+        container.add(edads);
+        container.add(nombre);
+        container.add(apellido);
         setSize(600, 600);
         eventos();
     }
@@ -72,19 +75,26 @@ public class Consulta extends JFrame {
     public final void agregarLabels() {
         lblCodigo = new JLabel("Carnet");
         lblUniversidad = new JLabel("Universidad");
-        lblStock = new JLabel("Stock");
-        lblExistencia = new JLabel("Stock en tienda");
-        
-        lblCodigo.setBounds(10, 10, ANCHOC, ALTOC);
-        lblUniversidad.setBounds(10, 60, ANCHOC, ALTOC);
-        lblStock.setBounds(10, 100, ANCHOC, ALTOC);
-        lblExistencia.setBounds(10, 140, ANCHOC, ALTOC);
+        lblEdad = new JLabel("Edad");
+        //estado = new JLabel("Estado");
+        lblNombre = new JLabel("Nombre");
+        lblApellido = new JLabel("Apellido");
+        edads = new JLabel("Edad");
+        //////////////////////////////////////////////////
+        lblNombre.setBounds(300,40,x,y);
+        lblCodigo.setBounds(10, 10, x, y);
+        lblUniversidad.setBounds(10, 60, x, y);
+        lblEdad.setBounds(10, 100, x, y);
+        //estado.setBounds(10, 140, x, y);
+        lblApellido.setBounds(300, 90, x, y);
     }
 
     public final void formulario() {
         codigo = new JTextField();
+        nombre = new JTextField();
+        apellido = new JTextField();
         marca = new JComboBox();
-        stock = new JTextField();
+        edad = new JTextField();
         si = new JRadioButton("si", true);
         no = new JRadioButton("no");
         resultados = new JTable();
@@ -104,17 +114,19 @@ public class Consulta extends JFrame {
         existencia.add(si);
         existencia.add(no);
 
-        codigo.setBounds(140, 10, ANCHOC, ALTOC);
-        marca.setBounds(140, 60, ANCHOC, ALTOC);
-        stock.setBounds(140, 100, ANCHOC, ALTOC);
-        si.setBounds(140, 140, 50, ALTOC);
-        no.setBounds(210, 140, 50, ALTOC);
+        codigo.setBounds(140, 10, x, y);
+        marca.setBounds(140, 60, x, y);
+        edad.setBounds(140, 100, x, y);
+        si.setBounds(140, 140, 50, y);
+        no.setBounds(210, 140, 50, y);
+        nombre.setBounds(300, 70, x, y);
+        apellido.setBounds(300, 120, x, y);
 
-        buscar.setBounds(300, 10, ANCHOC, ALTOC);
-        insertar.setBounds(10, 210, ANCHOC, ALTOC);
-        actualizar.setBounds(150, 210, ANCHOC, ALTOC);
-        eliminar.setBounds(300, 210, ANCHOC, ALTOC);
-        limpiar.setBounds(450, 210, ANCHOC, ALTOC);
+        buscar.setBounds(300, 10, x, y);
+        insertar.setBounds(10, 210, x, y);
+        actualizar.setBounds(150, 210, x, y);
+        eliminar.setBounds(300, 210, x, y);
+        limpiar.setBounds(450, 210, x, y);
         resultados = new JTable();
         
         resultados = new JTable() {
@@ -148,10 +160,10 @@ public class Consulta extends JFrame {
         tm.addColumn("Universidad");
 
         FiltroDao fd = new FiltroDao();
-        ArrayList<Filtro> filtros = fd.readAll();
+        ArrayList<Inscripcion> filtros = fd.readAll();
 
-        for (Filtro fi : filtros) {
-            tm.addRow(new Object[]{fi.getCodigo(), fi.getMarca(), fi.getStock(), fi.getExistencia()});
+        for (Inscripcion fi : filtros) {
+            tm.addRow(new Object[]{fi.getId(), fi.getNombres(), fi.getEdad(), fi.getApellidos()});
         }
 
         resultados.setModel(tm);
@@ -162,8 +174,8 @@ public class Consulta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = new Filtro(codigo.getText(), marca.getSelectedItem().toString(),
-                        Integer.parseInt(stock.getText()), true);
+                Inscripcion f = new Inscripcion(codigo.getText(), marca.getSelectedItem().toString(),
+                        Integer.parseInt(edad.getText()), true);
 
                 if (no.isSelected()) {
                     f.setExistencia(false);
@@ -183,8 +195,8 @@ public class Consulta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = new Filtro(codigo.getText(), marca.getSelectedItem().toString(),
-                        Integer.parseInt(stock.getText()), true);
+                Inscripcion f = new Inscripcion(codigo.getText(), marca.getSelectedItem().toString(),
+                        Integer.parseInt(edad.getText()), true);
 
                 if (no.isSelected()) {
                     f.setExistencia(false);
@@ -219,15 +231,15 @@ public class Consulta extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltroDao fd = new FiltroDao();
-                Filtro f = fd.read(codigo.getText());
+                Inscripcion f = fd.read(codigo.getText());
                 if (f == null) {
                     JOptionPane.showMessageDialog(null, "Filtro no encontrado");
                 } else {
-                    codigo.setText(f.getCodigo());
-                    marca.setSelectedItem(f.getMarca());
-                    stock.setText(Integer.toString(f.getStock()));
+                    codigo.setText(f.getApellidos());
+                    marca.setSelectedItem(f.getNombres());
+                    edad.setText(Integer.toString(f.getEdad()));
 
-                    if (f.getExistencia()) {
+                    if (f.isExistencia()) {
                         si.setSelected(true);
                     } else {
                         no.setSelected(true);
@@ -249,7 +261,7 @@ public class Consulta extends JFrame {
                 if (evnt.getClickCount() == 1) {
                     codigo.setText(resultados.getValueAt(resultados.getSelectedRow(), 0).toString());
                     marca.setSelectedItem(resultados.getValueAt(resultados.getSelectedRow(), 1).toString());
-                    stock.setText(resultados.getValueAt(resultados.getSelectedRow(), 2).toString());
+                    edad.setText(resultados.getValueAt(resultados.getSelectedRow(), 2).toString());
                     if (resultados.getValueAt(resultados.getSelectedRow(), 3).toString() == "false") {
                         no.setSelected(true);
                     } else {
@@ -262,8 +274,8 @@ public class Consulta extends JFrame {
 
     public void limpiarCampos() {
         codigo.setText("");
-        marca.setSelectedItem("FRAM");
-        stock.setText("");
+        marca.setSelectedItem("UCA");
+        edad.setText("");
     }
 
     public static void main(String[] args) {
