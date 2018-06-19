@@ -53,10 +53,18 @@ public class Inscripcion {
         this.existencia = existencia;
     }
     private int id,edad;
-    private String nombres, apellidos;
+    private String nombres, apellidos, universidad;
+
+    public String getUniversidad() {
+        return universidad;
+    }
+
+    public void setUniversidad(String universidad) {
+        this.universidad = universidad;
+    }
     private boolean existencia;
 
-
+    
     
     public Inscripcion(){
         

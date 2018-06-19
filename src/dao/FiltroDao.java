@@ -21,7 +21,7 @@ import modelo.Inscripcion;
 
 public class FiltroDao implements Metodos<Inscripcion> {
     //Creando nuestra querys 
-    private static final String SQL_INSERT="INSERT INTO alumnos(carnet,nombres,apellidos,edad,universidad) VALUES(?,?,?,?,?)";
+    private static final String SQL_INSERT="INSERT INTO alumnos(carnet,nombres,apellidos,edad,universidad,estado) VALUES(?,?,?,?,?,?)";
     private static final String SQL_UPDATE="UPDATE alumnos SET nombres = ?, apellidos=?, edad=?,universidad=?, WHERE carnet=?";
     private static final String SQL_DELETE="DELETE FROM alumnos WHERE carnet=?";
     private static final String SQL_READ="SELECT * FROM alumnos WHERE carnet=?";
@@ -33,11 +33,20 @@ public class FiltroDao implements Metodos<Inscripcion> {
         PreparedStatement ps;
         try{
             ps=con.getCnx().prepareStatement(SQL_INSERT);
-            ps.setString(1, g.getNombres());
-            ps.setString(2,g.getApellidos());
-            ps.setInt(3, g.getEdad());
-            ps.setInt(4, g.getId());
-            ps.setBoolean(5,true);
+            ps.setInt(1, g.getId());
+            ps.setString(2,g.getNombres());
+            ps.setString(3, g.getApellidos());
+            ps.setInt(4, g.getEdad());
+            ps.setString(5,g.getUniversidad());
+            ps.setBoolean(6,true);
+            /*
+             ps.setInt(1, 00162317);
+            ps.setString(2,"Roberto");
+            ps.setString(3, "Hernandez");
+            ps.setInt(4,18);
+            ps.setString(5,"UCA");
+            ps.setBoolean(6,true);
+            */
             if(ps.executeUpdate()>0){
                 return true;
             }

@@ -143,10 +143,12 @@ public class Consulta extends JFrame {
             public Class<?> getColumnClass(int column) {
                 switch (column) {
                     case 0:
-                        return String.class;
+                        return int.class;
                     case 1:
                         return String.class;
                     case 2:
+                        return String.class;
+                    case 3:
                         return String.class;
                     default:
                         return Boolean.class;
