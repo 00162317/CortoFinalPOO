@@ -20,6 +20,7 @@ public class Alumnos {
     private String carnet, nombres,apellidos, universidad;
     private boolean estado;
 
+
     /*
     Se hacen los SET y GETS de cada atributo 
     */
@@ -98,5 +99,21 @@ public class Alumnos {
         this.edad=edad;
         this.universidad=universidad;
         this.estado=estado;
+    }
+        public Alumnos(int id, String carnet, String nombres, String apellidos, int edad, String universidad, boolean estado) {
+        this.id=id;
+        this.carnet=carnet;
+        this.nombres=nombres;
+        this.apellidos=apellidos;
+        this.edad=edad;
+        this.universidad=universidad;
+        this.estado=estado;
+    }
+    
+    public Alumnos(String codigo, String marca, int edad, boolean b) {
+        this.carnet=codigo;
+        this.estado=b;
+        this.universidad=marca;
+        this.edad=edad;
     }
 }

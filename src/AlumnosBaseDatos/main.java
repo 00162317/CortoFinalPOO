@@ -8,7 +8,7 @@ package AlumnosBaseDatos;
 import Dao.AlumnosDao;
 import Entidades.Alumnos;
 
- 
+ /*
 public class main {
 
     
@@ -16,7 +16,7 @@ public class main {
      
     public static void main(String[] args) {
         // TODO code application logic here
-        Alumnos student = new Alumnos();
+       Alumnos student = new Alumnos();
         student.setNombres("Roberto");
         student.setApellidos("Hernandez");
         student.setCarnet("00162317");
@@ -24,10 +24,12 @@ public class main {
         student.setUniversidad("UCA");
         student.setEstado(true);
         AlumnosDao alumno = new AlumnosDao();
-        alumno.create(student);
+      //  alumno.create(student);
+       alumno.delete("00162317");
         
     }
     
     
     
 }
+*/

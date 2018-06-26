@@ -138,7 +138,8 @@ public class AlumnosDao implements Metodos<Alumnos>/*Tomo mis metodos y los hago
                     - O se podria recibir como parametro el numero de la columna (ACA SE INICIA DEL UNO, UNOOOO)
                     - O el nombre de la columna
                 */
-                variable= new Alumnos(resultset.getString(2),resultset.getString(3),resultset.getInt(4),resultset.getString(5),resultset.getBoolean(6));
+                variable = new Alumnos(resultset.getInt(1), resultset.getString(2), resultset.getString(3), resultset.getString(4), resultset.getInt(5), resultset.getString(6), resultset.getBoolean(7));
+
             }
             resultset.close();//Cierra el cursor
         }
@@ -161,7 +162,7 @@ public class AlumnosDao implements Metodos<Alumnos>/*Tomo mis metodos y los hago
             consultaReadAll = con.getConex().prepareStatement(SQL_READALL);
             resultset = consultaReadAll.executeQuery(SQL_READALL);
             while(resultset.next()){
-                all.add(new Alumnos(resultset.getString(1),resultset.getString(2),resultset.getString(3),resultset.getInt(4),resultset.getString(5),resultset.getBoolean(6)));
+                all.add(new Alumnos(resultset.getString(2),resultset.getString(3),resultset.getString(4),resultset.getInt(5),resultset.getString(6),resultset.getBoolean(7)));
             }
             resultset.close();
         }
